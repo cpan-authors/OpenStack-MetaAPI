@@ -18,6 +18,7 @@ my %WriteMakefileArgs = (
   "NAME" => "OpenStack::MetaAPI",
   "PREREQ_PM" => {
     "JSON" => 0,
+    "LWP::UserAgent" => 0,
     "Moo" => 0,
     "Moo::Role" => 0,
     "OpenStack::Client" => "1.0006",
