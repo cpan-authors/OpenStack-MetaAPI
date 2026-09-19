@@ -8,8 +8,9 @@ OpenStack::MetaAPI Changes
     the X-Auth-Token of every request went to whichever server answered.
     new() now gives OpenStack::Client::Auth the new class
     OpenStack::MetaAPI::UserAgent as package_ua, which leaves the check to
-    LWP: on, unless PERL_LWP_SSL_VERIFY_HOSTNAME=0. A caller that builds
-    its own auth object passes package_ua => 'OpenStack::MetaAPI::UserAgent'
+    LWP: on, unless PERL_LWP_SSL_VERIFY_HOSTNAME=0. If that variable is
+    not set, HTTPS_CA_FILE or HTTPS_CA_DIR also turns it off. A caller that
+    builds its own auth object passes package_ua => 'OpenStack::MetaAPI::UserAgent'
     to get the same. A cloud with a self-signed certificate now needs
     PERL_LWP_SSL_CA_FILE, or PERL_LWP_SSL_VERIFY_HOSTNAME=0.
 

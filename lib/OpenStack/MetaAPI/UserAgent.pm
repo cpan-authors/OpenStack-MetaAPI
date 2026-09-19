@@ -24,6 +24,9 @@ sub new {
 
 __END__
 
+=for test_synopsis
+my ($endpoint, %auth_args);
+
 =head1 SYNOPSIS
 
     # OpenStack::MetaAPI uses this class unless you name another one.
@@ -34,7 +37,7 @@ __END__
         $endpoint, %auth_args,
         package_ua => 'OpenStack::MetaAPI::UserAgent',
     );
-    my $api = OpenStack::MetaAPI->new({auth => $auth});
+    my $api_from_auth = OpenStack::MetaAPI->new({auth => $auth});
 
 =head1 DESCRIPTION
 
@@ -49,8 +52,10 @@ session in its headers.
 This class removes C<verify_hostname> from the C<ssl_opts> it is given, and
 passes everything else to L<LWP::UserAgent>.  LWP then decides, as it does for
 any user agent: the check is on, unless the environment variable
-C<PERL_LWP_SSL_VERIFY_HOSTNAME> is set to 0.  To trust a private certificate
-authority, set C<PERL_LWP_SSL_CA_FILE> or C<PERL_LWP_SSL_CA_PATH>.  To change
+C<PERL_LWP_SSL_VERIFY_HOSTNAME> is set to 0.  If C<PERL_LWP_SSL_VERIFY_HOSTNAME>
+is not set, the older variables C<HTTPS_CA_FILE> and C<HTTPS_CA_DIR> also turn
+the check off, for compatibility with L<Crypt::SSLeay>.  To trust a private
+certificate authority, set C<PERL_LWP_SSL_CA_FILE> or C<PERL_LWP_SSL_CA_PATH>.  To change
 anything else, subclass this class and give yours as C<package_ua>.
 
 =head1 METHODS

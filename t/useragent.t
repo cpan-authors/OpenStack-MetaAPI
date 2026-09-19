@@ -46,6 +46,16 @@ subtest 'new() leaves the decision to LWP' => sub {
         0, 'PERL_LWP_SSL_VERIFY_HOSTNAME=0 turns it off');
 };
 
+subtest 'HTTPS_CA_FILE turns the check off, as the POD says' => sub {
+    local $ENV{HTTPS_CA_FILE} = '/bogus/ca.pem';
+    is(OpenStack::MetaAPI::UserAgent->new->ssl_opts('verify_hostname'), 0,
+        'without PERL_LWP_SSL_VERIFY_HOSTNAME');
+
+    local $ENV{PERL_LWP_SSL_VERIFY_HOSTNAME} = 1;
+    is(OpenStack::MetaAPI::UserAgent->new->ssl_opts('verify_hostname'), 1,
+        'PERL_LWP_SSL_VERIFY_HOSTNAME=1 wins over it');
+};
+
 subtest 'OpenStack::Client with this class checks the hostname' => sub {
     my $client = OpenStack::Client->new($ENDPOINT,
         package_ua => 'OpenStack::MetaAPI::UserAgent');
