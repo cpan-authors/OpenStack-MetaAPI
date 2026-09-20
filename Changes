@@ -14,6 +14,11 @@ OpenStack::MetaAPI Changes
     to get the same. A cloud with a self-signed certificate now needs
     PERL_LWP_SSL_CA_FILE, or PERL_LWP_SSL_VERIFY_HOSTNAME=0.
 
+  [ Dependencies ]
+  - LWP::UserAgent is now a direct requirement. OpenStack::MetaAPI::UserAgent
+    subclasses it. It was already pulled in by OpenStack::Client, but the
+    distribution now asks for it by name.
+
 0.004     2026-09-10 20:02:40-06:00 America/Denver
 
   [ New features ]

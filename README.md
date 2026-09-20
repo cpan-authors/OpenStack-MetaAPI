@@ -4,7 +4,7 @@ OpenStack::MetaAPI - Perl5 OpenStack API abstraction on top of OpenStack::Client
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
@@ -121,6 +121,10 @@ Feel free to report issues to the Bug Tracker or contribute.
 
 Create one OpenStack::MetaAPI object.
 For now all arguments passed to `new` are used to create one [OpenStack::Client::Auth](https://metacpan.org/pod/OpenStack%3A%3AClient%3A%3AAuth).
+
+Its user agent checks the hostname of each server it talks to, unless you pass
+another `package_ua`.  See [OpenStack::MetaAPI::UserAgent](https://metacpan.org/pod/OpenStack%3A%3AMetaAPI%3A%3AUserAgent), which also tells
+what to do when you build the auth object yourself.
 
 ## $api->flavors( \[ %filter \] )
 
