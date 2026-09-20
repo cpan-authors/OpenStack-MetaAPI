@@ -2,6 +2,8 @@ OpenStack::MetaAPI Changes
 
 {{$NEXT}}
 
+0.005     2026-09-20 16:47:03-06:00 America/Denver
+
   [ Security ]
   - Check the hostname of the TLS certificate of each OpenStack endpoint.
     OpenStack::Client makes its user agents with verify_hostname => 0, so
