@@ -1,6 +1,7 @@
 requires 'OpenStack::Client', '1.0006';
 requires 'YAML::XS';
 requires 'JSON';
+requires 'LWP::UserAgent';
 requires 'Moo';
 requires 'Moo::Role';
 

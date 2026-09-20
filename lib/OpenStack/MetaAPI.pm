@@ -4,8 +4,9 @@ use strict;
 use warnings;
 
 use MIME::Base64              ();
-use OpenStack::Client::Auth    ();
-use OpenStack::MetaAPI::Routes ();
+use OpenStack::Client::Auth       ();
+use OpenStack::MetaAPI::Routes    ();
+use OpenStack::MetaAPI::UserAgent ();
 use Scalar::Util qw/blessed weaken/;
 
 use Moo;
@@ -65,8 +66,12 @@ around BUILDARGS => sub {
       && ref $args[0] eq 'HASH'
       && blessed($args[0]->{'auth'});
 
-    # automagically build the OpenStack::Client::Auth from existing args
-    return {auth => OpenStack::Client::Auth->new(@args)};
+    # OpenStack::Client turns off the check of the server's hostname unless
+    # its user agent class puts it back.  See OpenStack::MetaAPI::UserAgent.
+    my ($endpoint, %args) = @args;
+    $args{package_ua} //= 'OpenStack::MetaAPI::UserAgent';
+
+    return {auth => OpenStack::Client::Auth->new($endpoint, %args)};
 };
 
 sub create_vm {
@@ -262,6 +267,10 @@ Feel free to report issues to the Bug Tracker or contribute.
 
 Create one OpenStack::MetaAPI object.
 For now all arguments passed to C<new> are used to create one L<OpenStack::Client::Auth>.
+
+Its user agent checks the hostname of each server it talks to, unless you pass
+another C<package_ua>.  See L<OpenStack::MetaAPI::UserAgent>, which also tells
+what to do when you build the auth object yourself.
 
 =head2 $api->flavors( [ %filter ] )
 
