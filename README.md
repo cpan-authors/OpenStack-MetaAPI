@@ -4,7 +4,7 @@ OpenStack::MetaAPI - Perl5 OpenStack API abstraction on top of OpenStack::Client
 
 # VERSION
 
-version 0.005
+version 0.006
 
 # SYNOPSIS
 
