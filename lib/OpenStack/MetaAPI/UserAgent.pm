@@ -24,10 +24,13 @@ sub new {
 
 __END__
 
-=for test_synopsis
-my ($endpoint, %auth_args);
-
 =head1 SYNOPSIS
+
+    my $endpoint  = $ENV{OS_AUTH_URL};
+    my %auth_args = (
+        username => $ENV{OS_USERNAME},
+        password => $ENV{OS_PASSWORD},
+    );
 
     # OpenStack::MetaAPI uses this class unless you name another one.
     my $api = OpenStack::MetaAPI->new($endpoint, %auth_args);
